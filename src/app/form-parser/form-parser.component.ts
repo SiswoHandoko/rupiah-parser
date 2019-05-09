@@ -9,7 +9,7 @@ import { FormParser } from './form-parser';
 export class FormParserComponent implements OnInit {
 
   constructor() { }
-
+  /* rupiah fractions */
   rupiah = [100000, 50000, 20000, 10000, 5000, 2000, 1000, 500, 100, 50];
   model = new FormParser('');
   parsedData = [];
@@ -25,8 +25,8 @@ export class FormParserComponent implements OnInit {
   onSubmit() {
     const res = this.validateAmount(this.model.input);
     if (res.status) {
+      /* Prepare amount and convert to int from string */
       let amount = parseInt(res.amount.replace(/\D/g, ''));
-      console.log(amount);
       const result = [];
       let i = 0;
       let stop = false;
@@ -117,9 +117,7 @@ export class FormParserComponent implements OnInit {
       };
     } else if (amount.includes(' ')) {
       amount = amount.replace(/\s/g, ' ');
-      console.log(amount.substring(0, 3));
       if ((!isNaN(parseInt(amount[3])) || !isNaN(parseInt(amount[4]))) && (amount.substring(0, 3) === 'Rp.' || amount.substring(0, 3) === 'Rp ')) {
-        console.log("1")
         return result = {
           'status': true,
           'amount': amount
