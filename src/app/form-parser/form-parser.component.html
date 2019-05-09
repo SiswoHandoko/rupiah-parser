@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Rupiah Parser</h1>
+  <label for="name">Account for only available current rupiah fractions: </label>
+  <div>
+    <span *ngFor="let rp of rupiah; let i = index;" class="badge badge-primary mr5"> {{rp}} </span>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #FormParser="ngForm">
+    <div class="form-group">
+      <label for="name">Input Amount : </label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="model.input" name="name"
+             #name="ngModel" placeholder="Rp. 500.000">
+      <div [hidden]="validate.status" class="alert alert-danger"> {{validate.message}}</div>
+    </div>
+
+    <div class="mb20" [hidden]="!submitted">
+      <label for="name">Result: </label>
+      <div>
+        <span *ngFor="let pd of parsedData; let i = index;" class="badge badge-warning mr5"> {{pd}} </span>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!FormParser.form.valid">Submit</button>
+    <button type="button" class="btn btn-default" (click)="resetParser(); FormParser.reset()">Reset</button>
+  </form>
+</div>
+
+
